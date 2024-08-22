@@ -9,6 +9,8 @@ export default function Header() {
 
 	const fetchCategories = useAppStore((state) => state.fetchCategories);
 
+	const categories = useAppStore((state) => state.categories);
+
 	useEffect(() => {
 		fetchCategories();
 	}, []);
@@ -80,6 +82,14 @@ export default function Header() {
 								className='p-3 w-full rounded-lg focus:outline-none'
 							>
 								<option value=''>-- Seleccione --</option>
+								{categories.drinks.map((category) => (
+									<option
+										key={category.strCategory}
+										value={category.strCategory}
+									>
+										{category.strCategory}
+									</option>
+								))}
 							</select>
 						</div>
 						<input
