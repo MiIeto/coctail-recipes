@@ -1,8 +1,13 @@
-import { useEffect, useMemo } from 'react';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAppStore } from '../stores/useAppStore';
 
 export default function Header() {
+	const [searchFilters, setSearchFilters] = useState({
+		ingredient: '',
+		category: '',
+	});
+
 	const { pathname } = useLocation();
 
 	const isHome = useMemo(() => pathname === '/', [pathname]);
@@ -14,6 +19,15 @@ export default function Header() {
 	useEffect(() => {
 		fetchCategories();
 	}, []);
+
+	const handleChange = (
+		e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+	) => {
+		setSearchFilters({
+			...searchFilters,
+			[e.target.name]: e.target.value,
+		});
+	};
 
 	return (
 		<header
@@ -67,6 +81,8 @@ export default function Header() {
 								name='ingredient'
 								className='p-3 w-full rounded-lg focus:outline-none'
 								placeholder='Nombre o Ingrediente. Ej. Vodka, Whisky...'
+								onChange={handleChange}
+								value={searchFilters.ingredient}
 							/>
 						</div>
 						<div className='space-y-4'>
@@ -80,6 +96,8 @@ export default function Header() {
 								id='category'
 								name='category'
 								className='p-3 w-full rounded-lg focus:outline-none'
+								onChange={handleChange}
+								value={searchFilters.category}
 							>
 								<option value=''>-- Seleccione --</option>
 								{categories.drinks.map((category) => (
