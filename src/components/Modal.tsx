@@ -10,6 +10,7 @@ export default function Modal() {
 	const handleClickFavorite = useAppStore(
 		(state) => state.handleClickFavorite
 	);
+	const favoriteExists = useAppStore((state) => state.favoriteExists);
 
 	const renderIngredients = () => {
 		const ingredients: JSX.Element[] = [];
@@ -113,7 +114,11 @@ export default function Modal() {
 												)
 											}
 										>
-											Agregar a Favoritos
+											{favoriteExists(
+												selectedRecipe.idDrink
+											)
+												? 'Eliminar de Favoritos'
+												: 'Agregar a Favoritos'}
 										</button>
 									</div>
 								</Dialog.Panel>
