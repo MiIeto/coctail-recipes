@@ -1,50 +1,80 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Coctail Recipes
 
-Currently, two official plugins are available:
+Una aplicacion creada con React.js para buscar recetas de bebidas alcoholicas segun ingredientes, utilizando una API gratuita para la obtencion de informacion
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Demo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+https://coctail-recipes-hazel.vercel.app/
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/MiIeto/coctail-recipes.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Go to the project directory
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+  cd coctail-recipes
 ```
+
+Install dependencies
+
+```bash
+  pnpm install
+```
+
+Start the server
+
+```bash
+  pnpm run dev
+  or
+  pnpm dev
+```
+
+
+## API Reference
+
+https://www.thecocktaildb.com/api.php
+
+#### Get all categories
+
+```https
+  GET /api/json/v1/1/list.php?c=list
+```
+
+#### Get Recipes
+
+```https
+  GET /api/json/v1/1/filter.php?c=category&i=ingredient
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `category`      | `string` | **Required**. Category of item to fetch |
+| `ingredient`      | `string` | **Required**. Ingredient of item to fetch |
+
+#### Get item
+
+```https
+  GET /api/json/v1/1/lookup.php?i=id
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
+
+## Tech Stack
+
+React, Typescript, TailwindCSS, ZOD, Zustand, React-Router-DOM
+
+
+## Gratitudes
+
+Muchas Gracias a **@codigoconjuan** por impartir el curso utilizado para crear este proyecto
